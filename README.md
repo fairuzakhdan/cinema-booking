@@ -49,13 +49,17 @@ src/components/
 ├── elements/     # Atoms  — Button, Input, Badge, Spinner
 ├── fragments/    # Molecules — MovieCard, SeatButton, CountdownTimer, PriceBreakdown, dll
 ├── layouts/      # Organisms — Navbar, SeatGrid, MovieGrid, BookingConfirmPanel
-└── providers/    # StoreProvider (Zustand hydration)
+└── providers/    # StoreProvider (Redux Provider + auth hydration)
 ```
 
-### State Management — Zustand
+### State Management — Redux Toolkit
 
-- **`auth.store.ts`** — Sesi user dihidrasi dari `GET /api/auth/me` saat mount. Tidak di-persist ke localStorage karena sesi dikelola server via cookie.
-- **`booking.store.ts`** — State alur pemesanan (kursi terpilih, timer, price breakdown). Ephemeral — direset setelah booking selesai atau timer habis.
+Dua slice terpisah dengan tanggung jawab yang jelas:
+
+- **`auth.slice.ts`** — Sesi user dihidrasi dari `GET /api/auth/me` saat mount. Actions: `setUser`, `clearUser`, `setLoading`.
+- **`booking.slice.ts`** — State alur pemesanan (kursi terpilih, timer, price breakdown). Ephemeral — direset setelah booking selesai atau timer habis. Actions: `setShowtime`, `toggleSeat`, `startTimer`, `decrementTimer`, `stopTimer`, `resetBooking`, `setPriceBreakdown`, `setConfirmedBookingId`.
+
+Store dikonfigurasi di `src/stores/store.ts` menggunakan `configureStore`. Typed hooks `useAppDispatch` dan `useAppSelector` digunakan di seluruh komponen untuk type safety penuh.
 
 ### Autentikasi — Cookie-Based Session
 
