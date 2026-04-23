@@ -1,0 +1,93 @@
+[
+  {
+    "id": "movie-001",
+    "title": "Penjaga Tanah Terakhir",
+    "genre": "Action",
+    "duration": 128,
+    "synopsis": "Seorang mantan pasukan khusus dipaksa kembali beraksi ketika kelompok kriminal mengancam akan menghancurkan kota besar. Ia harus melawan waktu dan mengumpulkan sekutu yang tak terduga untuk menyelamatkan jutaan nyawa.",
+    "rating": "PG-13",
+    "posterPlaceholder": "/posters/penjaga-tanah-terakhir.jpg",
+    "showtimes": [
+      { "id": "st-001", "date": "2026-04-20", "time": "13:00", "studioId": "studio-1", "basePrice": 45000 },
+      { "id": "st-002", "date": "2026-04-20", "time": "16:00", "studioId": "studio-1", "basePrice": 45000 },
+      { "id": "st-003", "date": "2026-04-20", "time": "19:00", "studioId": "studio-2", "basePrice": 50000 },
+      { "id": "st-004", "date": "2026-04-21", "time": "14:00", "studioId": "studio-1", "basePrice": 45000 },
+      { "id": "st-005", "date": "2026-04-21", "time": "18:30", "studioId": "studio-2", "basePrice": 50000 }
+    ]
+  },
+  {
+    "id": "movie-002",
+    "title": "Bisikan Hujan",
+    "genre": "Drama",
+    "duration": 112,
+    "synopsis": "Dua orang asing bertemu di stasiun kereta saat hujan deras dan saling berbagi cerita yang mengubah hidup mereka. Sebuah kisah mengharukan tentang kehilangan, koneksi, dan keberanian untuk memulai kembali.",
+    "rating": "PG",
+    "posterPlaceholder": "/posters/bisikan-hujan.jpg",
+    "showtimes": [
+      { "id": "st-006", "date": "2026-04-20", "time": "11:00", "studioId": "studio-3", "basePrice": 40000 },
+      { "id": "st-007", "date": "2026-04-20", "time": "15:30", "studioId": "studio-3", "basePrice": 40000 },
+      { "id": "st-008", "date": "2026-04-20", "time": "20:00", "studioId": "studio-1", "basePrice": 45000 },
+      { "id": "st-009", "date": "2026-04-21", "time": "13:00", "studioId": "studio-3", "basePrice": 40000 }
+    ]
+  },
+  {
+    "id": "movie-003",
+    "title": "Odyssey Galaksi",
+    "genre": "Sci-Fi",
+    "duration": 145,
+    "synopsis": "Tahun 2187, umat manusia telah menjajah sistem bintang yang jauh. Ketika sinyal misterius terdeteksi dari galaksi yang belum dipetakan, sekelompok penjelajah memulai perjalanan berbahaya yang akan menantang semua yang mereka ketahui tentang alam semesta.",
+    "rating": "PG-13",
+    "posterPlaceholder": "/posters/odyssey-galaksi.jpg",
+    "showtimes": [
+      { "id": "st-010", "date": "2026-04-20", "time": "12:00", "studioId": "studio-2", "basePrice": 55000 },
+      { "id": "st-011", "date": "2026-04-20", "time": "17:00", "studioId": "studio-2", "basePrice": 55000 },
+      { "id": "st-012", "date": "2026-04-21", "time": "15:00", "studioId": "studio-2", "basePrice": 55000 },
+      { "id": "st-013", "date": "2026-04-21", "time": "19:30", "studioId": "studio-1", "basePrice": 50000 }
+    ]
+  },
+  {
+    "id": "movie-004",
+    "title": "Ketawa Sampai Subuh",
+    "genre": "Comedy",
+    "duration": 98,
+    "synopsis": "Tiga sahabat dari kampung nekad ikut kompetisi stand-up comedy nasional demi menyelamatkan warung kopi peninggalan almarhum ayah mereka. Perjalanan mereka penuh kekacauan, momen kocak, dan pelajaran hidup yang tak terduga.",
+    "rating": "G",
+    "posterPlaceholder": "/posters/ketawa-sampai-subuh.jpg",
+    "showtimes": [
+      { "id": "st-014", "date": "2026-04-20", "time": "10:00", "studioId": "studio-3", "basePrice": 35000 },
+      { "id": "st-015", "date": "2026-04-20", "time": "14:00", "studioId": "studio-1", "basePrice": 40000 },
+      { "id": "st-016", "date": "2026-04-20", "time": "18:00", "studioId": "studio-3", "basePrice": 40000 },
+      { "id": "st-017", "date": "2026-04-21", "time": "11:00", "studioId": "studio-3", "basePrice": 35000 },
+      { "id": "st-018", "date": "2026-04-21", "time": "16:30", "studioId": "studio-1", "basePrice": 40000 }
+    ]
+  },
+  {
+    "id": "movie-005",
+    "title": "Rumah Sunyi",
+    "genre": "Horror",
+    "duration": 105,
+    "synopsis": "Sebuah keluarga pindah ke rumah tua di pinggiran Bandung yang ternyata menyimpan rahasia kelam. Setiap malam, suara-suara aneh terdengar dari loteng, dan anak bungsu mereka mulai berbicara dengan sosok yang tidak bisa dilihat orang lain.",
+    "rating": "R",
+    "posterPlaceholder": "/posters/rumah-sunyi.jpg",
+    "showtimes": [
+      { "id": "st-019", "date": "2026-04-20", "time": "21:00", "studioId": "studio-2", "basePrice": 50000 },
+      { "id": "st-020", "date": "2026-04-20", "time": "23:00", "studioId": "studio-1", "basePrice": 45000 },
+      { "id": "st-021", "date": "2026-04-21", "time": "20:00", "studioId": "studio-2", "basePrice": 50000 },
+      { "id": "st-022", "date": "2026-04-21", "time": "22:30", "studioId": "studio-3", "basePrice": 45000 }
+    ]
+  },
+  {
+    "id": "movie-006",
+    "title": "Melodi Terakhir",
+    "genre": "Drama",
+    "duration": 118,
+    "synopsis": "Seorang pianis muda dari Yogyakarta yang kehilangan pendengarannya secara perlahan berjuang untuk tampil di konser terakhirnya. Di tengah perjalanan itu, ia menemukan cinta dan makna hidup yang lebih dalam dari sekadar musik.",
+    "rating": "PG",
+    "posterPlaceholder": "/posters/melodi-terakhir.jpg",
+    "showtimes": [
+      { "id": "st-023", "date": "2026-04-20", "time": "12:30", "studioId": "studio-1", "basePrice": 45000 },
+      { "id": "st-024", "date": "2026-04-20", "time": "17:30", "studioId": "studio-3", "basePrice": 40000 },
+      { "id": "st-025", "date": "2026-04-21", "time": "14:30", "studioId": "studio-1", "basePrice": 45000 }
+    ]
+  }
+]

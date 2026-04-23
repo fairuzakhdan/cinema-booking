@@ -1,0 +1,47 @@
+[
+  {
+    "id": "user-001",
+    "name": "Rina Marlina",
+    "username": "rina",
+    "password": "rina123",
+    "email": "rina.marlina@email.com",
+    "phone": "081234567001",
+    "avatarPlaceholder": "/avatars/rina.jpg"
+  },
+  {
+    "id": "user-002",
+    "name": "Budi Hartono",
+    "username": "budi",
+    "password": "budi123",
+    "email": "budi.hartono@email.com",
+    "phone": "081234567002",
+    "avatarPlaceholder": "/avatars/budi.jpg"
+  },
+  {
+    "id": "user-003",
+    "name": "Sari Dewi",
+    "username": "sari",
+    "password": "sari123",
+    "email": "sari.dewi@email.com",
+    "phone": "081234567003",
+    "avatarPlaceholder": "/avatars/sari.jpg"
+  },
+  {
+    "id": "user-004",
+    "name": "Andi Prasetya",
+    "username": "andi",
+    "password": "andi123",
+    "email": "andi.prasetya@email.com",
+    "phone": "081234567004",
+    "avatarPlaceholder": "/avatars/andi.jpg"
+  },
+  {
+    "id": "user-005",
+    "name": "Mega Putri",
+    "username": "mega",
+    "password": "mega123",
+    "email": "mega.putri@email.com",
+    "phone": "081234567005",
+    "avatarPlaceholder": "/avatars/mega.jpg"
+  }
+]
