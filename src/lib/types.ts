@@ -74,12 +74,6 @@ export interface Booking {
   createdAt: string;
 }
 
-export interface ServerSession {
-  sessionId: string;
-  userId: string;
-  expiresAt: number;
-}
-
 export interface ApiError {
   error: string;
   details?: string;
