@@ -3,16 +3,20 @@ import { NextRequest, NextResponse } from 'next/server';
 export function proxy(req: NextRequest) {
   const { pathname } = req.nextUrl;
 
-  const isAuthPage = pathname.startsWith('/login');
   const isApiAuth = pathname.startsWith('/api/auth');
-  const isPublic = isAuthPage || isApiAuth;
-
-  if (isPublic) return NextResponse.next();
+  if (isApiAuth) return NextResponse.next();
 
   const sessionId = req.cookies.get('sessionId')?.value;
-  if (!sessionId) {
-    const loginUrl = new URL('/login', req.url);
-    return NextResponse.redirect(loginUrl);
+  const isAuthPage = pathname.startsWith('/login');
+
+  // Sudah login tapi akses /login → redirect ke /movies
+  if (isAuthPage && sessionId) {
+    return NextResponse.redirect(new URL('/movies', req.url));
+  }
+
+  // Belum login tapi akses halaman protected → redirect ke /login
+  if (!isAuthPage && !sessionId) {
+    return NextResponse.redirect(new URL('/login', req.url));
   }
 
   return NextResponse.next();
