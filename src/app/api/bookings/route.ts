@@ -1,21 +1,22 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getStore } from '@/lib/server/data-store';
+import { verifyJWT } from '@/lib/server/jwt';
 import { calculatePrice } from '@/lib/server/pricing';
 import { validateGapRule } from '@/lib/server/gap-rule';
 import { randomUUID } from 'crypto';
 import type { Booking } from '@/lib/types';
 
-function getAuthUser(req: NextRequest) {
-  const sessionId = req.cookies.get('sessionId')?.value;
-  if (!sessionId) return null;
+async function getAuthUser(req: NextRequest) {
+  const token = req.cookies.get('auth')?.value;
+  if (!token) return null;
+  const payload = await verifyJWT(token);
+  if (!payload) return null;
   const store = getStore();
-  const session = store.sessions.get(sessionId);
-  if (!session || session.expiresAt < Date.now()) return null;
-  return store.users.find((u) => u.id === session.userId) ?? null;
+  return store.users.find((u) => u.id === payload.userId) ?? null;
 }
 
 export async function POST(req: NextRequest) {
-  const user = getAuthUser(req);
+  const user = await getAuthUser(req);
   if (!user) return NextResponse.json({ error: 'Not authenticated' }, { status: 401 });
 
   try {
@@ -40,14 +41,12 @@ export async function POST(req: NextRequest) {
     const seatState = store.seatState[showtimeId];
     if (!seatState) return NextResponse.json({ error: 'Seat state not found' }, { status: 404 });
 
-    // Check availability
     for (const seatId of seatIds) {
       if (seatState[seatId] !== 'available') {
         return NextResponse.json({ error: `Seat ${seatId} is not available` }, { status: 400 });
       }
     }
 
-    // Validate gap rule
     const allSeatIds = Object.keys(seatState);
     const occupiedSeatIds = allSeatIds.filter((id) => seatState[id] === 'booked');
     const gapResult = validateGapRule(seatIds, occupiedSeatIds, allSeatIds);
@@ -58,10 +57,8 @@ export async function POST(req: NextRequest) {
       }, { status: 400 });
     }
 
-    // Calculate price
     const priceBreakdown = calculatePrice(seatIds, showtime.date, showtime.time, showtime.basePrice);
 
-    // Mark seats as booked
     for (const seatId of seatIds) {
       seatState[seatId] = 'booked';
     }
@@ -83,7 +80,6 @@ export async function POST(req: NextRequest) {
     };
 
     store.bookings.set(booking.id, booking);
-
     return NextResponse.json({ booking }, { status: 201 });
   } catch {
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 });

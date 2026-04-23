@@ -6,7 +6,7 @@ export function proxy(req: NextRequest) {
   const isApiAuth = pathname.startsWith('/api/auth');
   if (isApiAuth) return NextResponse.next();
 
-  const sessionId = req.cookies.get('sessionId')?.value;
+  const sessionId = req.cookies.get('auth')?.value;
   const isAuthPage = pathname.startsWith('/login');
 
   // Sudah login tapi akses /login → redirect ke /movies

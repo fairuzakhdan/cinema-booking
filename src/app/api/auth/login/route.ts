@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getStore } from '@/lib/server/data-store';
-import { randomUUID } from 'crypto';
+import { createJWT } from '@/lib/server/jwt';
 
 export async function POST(req: NextRequest) {
   try {
@@ -20,14 +20,11 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Invalid username or password' }, { status: 401 });
     }
 
-    const sessionId = randomUUID();
-    const expiresAt = Date.now() + 24 * 60 * 60 * 1000; // 24h
-    store.sessions.set(sessionId, { sessionId, userId: user.id, expiresAt });
-
+    const token = await createJWT(user.id);
     const { password: _pw, ...safeUser } = user;
 
     const res = NextResponse.json({ user: safeUser }, { status: 200 });
-    res.cookies.set('sessionId', sessionId, {
+    res.cookies.set('auth', token, {
       httpOnly: true,
       sameSite: 'strict',
       path: '/',

@@ -1,4 +1,4 @@
-import type { Movie, UserWithPassword, Seat, Booking, ServerSession, StudioLayout } from '@/lib/types';
+import type { Movie, UserWithPassword, Booking, StudioLayout } from '@/lib/types';
 import moviesData from '@/data/movies.json';
 import usersData from '@/data/users.json';
 import seatsData from '@/data/seats.json';
@@ -13,17 +13,17 @@ interface ServerStore {
   users: UserWithPassword[];
   movies: Movie[];
   seatState: SeatStateMap;
-  sessions: Map<string, ServerSession>;
   bookings: Map<string, Booking>;
 }
 
-let store: ServerStore | null = null;
+declare global {
+  // eslint-disable-next-line no-var
+  var __cinemaStore: ServerStore | undefined;
+}
 
 function initSeatState(): SeatStateMap {
   const state: SeatStateMap = {};
   const studios = seatsData as Record<string, StudioLayout>;
-
-  // For each movie showtime, clone the studio's initial seat state
   const movies = moviesData as Movie[];
   for (const movie of movies) {
     for (const showtime of movie.showtimes) {
@@ -39,16 +39,15 @@ function initSeatState(): SeatStateMap {
 }
 
 export function getStore(): ServerStore {
-  if (!store) {
-    store = {
+  if (!globalThis.__cinemaStore) {
+    globalThis.__cinemaStore = {
       users: usersData as UserWithPassword[],
       movies: moviesData as Movie[],
       seatState: initSeatState(),
-      sessions: new Map(),
       bookings: new Map(),
     };
   }
-  return store;
+  return globalThis.__cinemaStore;
 }
 
 export function getStudioLayout(studioId: string): StudioLayout | null {
