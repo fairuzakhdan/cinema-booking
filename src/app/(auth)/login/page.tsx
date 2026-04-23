@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { FiFilm, FiLock, FiUser } from 'react-icons/fi';
 import { Button } from '@/components/elements';
 import { Input } from '@/components/elements';
-import { useAuthStore } from '@/stores/auth.store';
+import { useAppDispatch, setUser } from '@/stores';
 import type { User } from '@/lib/types';
 
 export default function LoginPage() {
@@ -13,7 +13,7 @@ export default function LoginPage() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-  const { setUser } = useAuthStore();
+  const dispatch = useAppDispatch();
   const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -36,7 +36,7 @@ export default function LoginPage() {
       }
 
       if (data.user) {
-        setUser(data.user);
+        dispatch(setUser(data.user));
         router.replace('/movies');
       }
     } catch {

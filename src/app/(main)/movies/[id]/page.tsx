@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { FiArrowLeft, FiClock, FiStar, FiCalendar } from 'react-icons/fi';
 import { Badge, Button, Spinner } from '@/components/elements';
 import { ShowtimeCard } from '@/components/fragments';
-import { useBookingStore } from '@/stores/booking.store';
+import { useAppDispatch, setShowtime } from '@/stores';
 import type { Movie, Showtime } from '@/lib/types';
 
 interface MovieDetailPageProps {
@@ -20,8 +20,8 @@ export default function MovieDetailPage({ params }: MovieDetailPageProps) {
   const [movie, setMovie] = useState<Movie | null>(null);
   const [loading, setLoading] = useState(true);
   const [movieId, setMovieId] = useState('');
+  const dispatch = useAppDispatch();
   const router = useRouter();
-  const { setShowtime } = useBookingStore();
 
   useEffect(() => {
     params.then(({ id }) => {
@@ -35,14 +35,14 @@ export default function MovieDetailPage({ params }: MovieDetailPageProps) {
 
   const handleSelectShowtime = (showtime: Showtime) => {
     if (!movie) return;
-    setShowtime({
+    dispatch(setShowtime({
       movieId: movie.id,
       movieTitle: movie.title,
       showtimeId: showtime.id,
       showtimeDate: showtime.date,
       showtimeTime: showtime.time,
       basePrice: showtime.basePrice,
-    });
+    }));
     router.push(`/movies/${movie.id}/showtimes/${showtime.id}/seats`);
   };
 

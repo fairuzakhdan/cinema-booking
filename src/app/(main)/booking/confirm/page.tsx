@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { FiCheckCircle, FiArrowLeft } from 'react-icons/fi';
 import { Button, Spinner } from '@/components/elements';
 import { BookingConfirmPanel } from '@/components/layouts';
-import { useBookingStore } from '@/stores/booking.store';
+import { useAppDispatch, useAppSelector, resetBooking } from '@/stores';
 import type { Booking } from '@/lib/types';
 
 export default function BookingConfirmPage() {
@@ -13,14 +13,15 @@ export default function BookingConfirmPage() {
   const [loading, setLoading] = useState(true);
   const [confirmed, setConfirmed] = useState(false);
   const router = useRouter();
-  const { confirmedBookingId, resetBooking, movieId } = useBookingStore();
+  const dispatch = useAppDispatch();
+  const confirmedBookingId = useAppSelector((state) => state.booking.confirmedBookingId);
+  const movieId = useAppSelector((state) => state.booking.movieId);
 
   useEffect(() => {
     if (!confirmedBookingId) {
       router.replace('/movies');
       return;
     }
-    // Fetch the booking details from my bookings
     fetch('/api/bookings/my')
       .then((r) => r.json() as Promise<{ bookings: Booking[] }>)
       .then(({ bookings }) => {
@@ -33,14 +34,14 @@ export default function BookingConfirmPage() {
 
   const handleConfirm = () => {
     setConfirmed(true);
-    resetBooking();
+    dispatch(resetBooking());
     router.push('/bookings');
   };
 
   const handleCancel = async () => {
     if (!booking) return;
     await fetch(`/api/bookings/${booking.id}`, { method: 'DELETE' });
-    resetBooking();
+    dispatch(resetBooking());
     router.push(movieId ? `/movies/${movieId}` : '/movies');
   };
 
@@ -68,12 +69,7 @@ export default function BookingConfirmPage() {
         </Button>
         <h1 className="font-bold text-[var(--color-text)] text-lg">Konfirmasi Pemesanan</h1>
       </div>
-
-      <BookingConfirmPanel
-        booking={booking}
-        onConfirm={handleConfirm}
-        onCancel={handleCancel}
-      />
+      <BookingConfirmPanel booking={booking} onConfirm={handleConfirm} onCancel={handleCancel} />
     </div>
   );
 }

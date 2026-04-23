@@ -1,15 +1,18 @@
 'use client';
 
-import { useAuthStore } from '@/stores/auth.store';
+import { useAppDispatch, useAppSelector, clearUser } from '@/stores';
 import { useRouter } from 'next/navigation';
 
 export function useAuth() {
-  const { user, isAuthenticated, isLoading, clearUser } = useAuthStore();
+  const dispatch = useAppDispatch();
+  const user = useAppSelector((state) => state.auth.user);
+  const isAuthenticated = useAppSelector((state) => state.auth.isAuthenticated);
+  const isLoading = useAppSelector((state) => state.auth.isLoading);
   const router = useRouter();
 
   const logout = async () => {
     await fetch('/api/auth/logout', { method: 'POST' });
-    clearUser();
+    dispatch(clearUser());
     router.push('/login');
   };
 

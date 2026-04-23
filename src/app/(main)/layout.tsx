@@ -2,12 +2,13 @@
 
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { useAuthStore } from '@/stores/auth.store';
+import { useAppSelector } from '@/stores';
 import { Navbar } from '@/components/layouts';
 import { Spinner } from '@/components/elements';
 
 export default function MainLayout({ children }: { children: React.ReactNode }) {
-  const { isAuthenticated, isLoading } = useAuthStore();
+  const isAuthenticated = useAppSelector((state) => state.auth.isAuthenticated);
+  const isLoading = useAppSelector((state) => state.auth.isLoading);
   const router = useRouter();
 
   useEffect(() => {
